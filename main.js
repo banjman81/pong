@@ -57,15 +57,26 @@ function update() {
 }
 
 document.addEventListener('keydown', function(event){
+    const spacer = 5
     // player paddle down
     if(event.keyCode == 40){
-        playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity
-        playerPaddle.style.top =`${playerPaddleYPosition}px`;
+        if(playerPaddleYPosition > 400 - spacer){
+            playerPaddleYPosition = playerPaddleYPosition + 0
+        }
+        else{
+            playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity
+            playerPaddle.style.top =`${playerPaddleYPosition}px`;
+        }
     }
     // player paddle up
     else if(event.keyCode == 38){
-        playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity*-1
-        playerPaddle.style.top =`${playerPaddleYPosition}px`;
+        if(playerPaddleYPosition < 0 + spacer){
+            playerPaddleYPosition = playerPaddleYPosition + 0
+        }
+        else{
+            playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity*-1
+            playerPaddle.style.top =`${playerPaddleYPosition}px`;
+        }
     }
 })
 
