@@ -17,8 +17,8 @@ const ball = document.querySelector('.ball');
 // The y-velocity of the computer paddle
 let computerPaddleYPosition = 0;
 let computerPaddleYVelocity = 1;
-let playerPaddleYPosition = 0;
-let playerPaddleYVelocity = 1;
+let playerPaddleYPosition = 100;
+let playerPaddleYVelocity = 5;
 
 let ballYPosition = 0;
 let ballXPosition = 0;
@@ -57,11 +57,13 @@ function update() {
 }
 
 document.addEventListener('keydown', function(event){
-    if(event.keyCode == 38){
+    // player paddle down
+    if(event.keyCode == 40){
         playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity
         playerPaddle.style.top =`${playerPaddleYPosition}px`;
     }
-    else if(event.keyCode == 40){
+    // player paddle up
+    else if(event.keyCode == 38){
         playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity*-1
         playerPaddle.style.top =`${playerPaddleYPosition}px`;
     }
