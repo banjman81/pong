@@ -18,7 +18,7 @@ const ball = document.querySelector('.ball');
 let computerPaddleYPosition = 0;
 let computerPaddleYVelocity = 1;
 let playerPaddleYPosition = 100;
-let playerPaddleYVelocity = 5;
+let playerPaddleYVelocity = 10;
 
 let ballYPosition = 0;
 let ballXPosition = 0;
@@ -27,29 +27,36 @@ let ballXVelocity = 2;
 
 // Update the pong world
 function update() {
+    // Update the computer paddle's position tracking ball
+    computerPaddleYPosition = ballYPosition -50 + BALL_SIZE;
     if(computerPaddleYPosition >400){
-        computerPaddleYVelocity = computerPaddleYVelocity *-1
+        computerPaddleYPosition = 400;
     }
     else if(computerPaddleYPosition < 0){
-        computerPaddleYVelocity = computerPaddleYVelocity *-1
+        computerPaddleYPosition = 0;
     }
-    // Update the computer paddle's position
-    computerPaddleYPosition = computerPaddleYPosition + computerPaddleYVelocity;
 
     // Apply the y-position 
     computerPaddle.style.top = `${computerPaddleYPosition}px`;
-    if(ballXPosition > 700-20){
+    if(ballYPosition > playerPaddleYPosition -15 && ballYPosition < playerPaddleYPosition +115 && ballXPosition < 20){
+        ballXPosition = 20
+        ballXVelocity = ballXVelocity*-1
+        console.log('true')
+    }
+    else if(ballXPosition > 700-40){
         ballXVelocity = ballXVelocity*-1
     }
     else if(ballYPosition > 500-20){
         ballYVelocity = ballYVelocity*-1
     }
-    if(ballXPosition < 0){
-        ballXVelocity = ballXVelocity*-1
+    else if(ballXPosition < 0){
+        ballXPosition = 350 -BALL_SIZE
+        ballyPosition = 250 -BALL_SIZE
     }
     else if(ballYPosition <0 ){
         ballYVelocity = ballYVelocity*-1
     }
+    
     ballXPosition = ballXPosition + ballXVelocity
     ballYPosition = ballYPosition + ballYVelocity
     ball.style.top =`${ballYPosition}px`;
@@ -81,4 +88,4 @@ document.addEventListener('keydown', function(event){
 })
 
 // Call the update() function every 35ms
-setInterval(update, 15);
+setInterval(update, 25);
