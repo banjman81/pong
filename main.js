@@ -61,20 +61,20 @@ document.addEventListener('keydown', function(event){
     // player paddle down
     if(event.keyCode == 40){
         if(playerPaddleYPosition > 400 - spacer){
-            playerPaddleYPosition = playerPaddleYPosition + 0
+            playerPaddleYPosition = playerPaddleYPosition + 0;
         }
         else{
-            playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity
+            playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity;
             playerPaddle.style.top =`${playerPaddleYPosition}px`;
         }
     }
     // player paddle up
     else if(event.keyCode == 38){
         if(playerPaddleYPosition < 0 + spacer){
-            playerPaddleYPosition = playerPaddleYPosition + 0
+            playerPaddleYPosition = playerPaddleYPosition + 0;
         }
         else{
-            playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity*-1
+            playerPaddleYPosition = playerPaddleYPosition + playerPaddleYVelocity*-1;
             playerPaddle.style.top =`${playerPaddleYPosition}px`;
         }
     }
