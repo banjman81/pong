@@ -13,6 +13,11 @@ const BALL_SIZE = 20;
 const computerPaddle = document.querySelector('.computer-paddle');
 const playerPaddle = document.querySelector('.player-paddle');
 const ball = document.querySelector('.ball');
+const harder = document.querySelector('.addBallSpeed');
+const easier = document.querySelector('.reduceBallSpeed');
+const level = document.querySelector('h1.level');
+const tracker = document.querySelector('h1.score');
+const maxTracker = document.querySelector('h1.highScore');
 
 // The y-velocity of the computer paddle
 let computerPaddleYPosition = 0;
@@ -20,10 +25,14 @@ let computerPaddleYVelocity = 1;
 let playerPaddleYPosition = 100;
 let playerPaddleYVelocity = 10;
 
+let botPLay = false
 let ballYPosition = 0;
 let ballXPosition = 0;
-let ballYVelocity = 2;
-let ballXVelocity = 2;
+let ballYVelocity = 1;
+let ballXVelocity = 1;
+let stage = 1;
+let score = 0
+let highScore = 0
 
 // Update the pong world
 function update() {
@@ -38,10 +47,14 @@ function update() {
 
     // Apply the y-position 
     computerPaddle.style.top = `${computerPaddleYPosition}px`;
-    if(ballYPosition > playerPaddleYPosition -15 && ballYPosition < playerPaddleYPosition +115 && ballXPosition < 20){
+    if(ballYPosition > playerPaddleYPosition -5 && ballYPosition < playerPaddleYPosition +105 && ballXPosition < 20){
         ballXPosition = 20
         ballXVelocity = ballXVelocity*-1
         console.log('true')
+        score++
+        if(highScore < score){
+            highScore = score
+        }
     }
     else if(ballXPosition > 700-40){
         ballXVelocity = ballXVelocity*-1
@@ -52,6 +65,11 @@ function update() {
     else if(ballXPosition < 0){
         ballXPosition = 350 -BALL_SIZE
         ballyPosition = 250 -BALL_SIZE
+        alert('Game Over!! Click "OK" to try again.')
+        ballYVelocity = 1;
+        ballXVelocity = 1;
+        stage = 1
+        score = 0
     }
     else if(ballYPosition <0 ){
         ballYVelocity = ballYVelocity*-1
@@ -61,6 +79,14 @@ function update() {
     ballYPosition = ballYPosition + ballYVelocity
     ball.style.top =`${ballYPosition}px`;
     ball.style.left =`${ballXPosition}px`;
+    level.innerText = `Level: ${stage}`
+    level.style.color = 'white'
+    tracker.innerText = `Score: ${score}`
+    maxTracker.innerText = `Highscore: ${highScore}`
+    tracker.style.color = 'white'
+    maxTracker.style.color = 'lime'
+    tracker.style.margin = '10px'
+    maxTracker.style.margin = '10px'
 }
 
 document.addEventListener('keydown', function(event){
@@ -87,5 +113,39 @@ document.addEventListener('keydown', function(event){
     }
 })
 
+function speedSetter(stage){
+    // set ball speed
+    if(stage == 1){
+        return 1
+    }
+    else if(stage == 2){
+        return 3
+    }
+    else if(stage == 3){
+        return 5
+    }
+}
+
+harder.addEventListener('click', function(){
+    if(stage < 3){
+        stage++
+        ballXVelocity = speedSetter(stage)
+        ballYVelocity = speedSetter(stage)
+        ballXPosition = 350 -BALL_SIZE
+        ballyPosition = 250 -BALL_SIZE
+    }
+})
+
+easier.addEventListener('click', function(){
+    if(stage > 1){
+        stage--
+        ballXVelocity = speedSetter(stage)
+        ballYVelocity = speedSetter(stage)
+        ballXPosition = 350 -BALL_SIZE
+        ballyPosition = 250 -BALL_SIZE
+    }
+})
+
+
 // Call the update() function every 35ms
-setInterval(update, 25);
+setInterval(update, 20);
