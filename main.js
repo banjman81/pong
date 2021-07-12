@@ -47,7 +47,7 @@ function update() {
 
     // Apply the y-position 
     computerPaddle.style.top = `${computerPaddleYPosition}px`;
-    if(ballYPosition > playerPaddleYPosition -15 && ballYPosition < playerPaddleYPosition +98 && ballXPosition < 20){
+    if(ballYPosition > playerPaddleYPosition -15 && ballYPosition < playerPaddleYPosition +99 && ballXPosition < 20){
         ballXPosition = 20
         ballXVelocity = ballXVelocity*-1
         console.log('true')
