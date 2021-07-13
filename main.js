@@ -100,7 +100,8 @@ function update() {
     else if(ballXPosition > 700-40){
         ballXVelocity = ballXVelocity*-1
     }
-    else if(ballYPosition > 500-20){
+    else if(ballYPosition > 500-18){
+        ballYPosition -= 2
         ballYVelocity = ballYVelocity*-1
     }
     else if(ballXPosition < 0){
@@ -115,7 +116,8 @@ function update() {
         stage = 1
         score = 0
     }
-    else if(ballYPosition <0 ){
+    else if(ballYPosition <1 ){
+        ballYPosition += 2
         ballYVelocity = ballYVelocity*-1
     }
     // ball collisions
@@ -183,12 +185,14 @@ function update() {
         ball2XVelocity = ball2XVelocity*-1
     }
     else if(ball2YPosition > 500-20){
+        ball2YPosition -= 2
         ball2YVelocity = ball2YVelocity*-1
     }
     else if(ball2XPosition < 0){
         ball2XVelocity = ball2XVelocity*-1
     }
-    else if(ball2YPosition <0 ){
+    else if(ball2YPosition <1 ){
+        ball2YPosition += 2
         ball2YVelocity = ball2YVelocity*-1
     }
 
